@@ -1,23 +1,48 @@
-running_total = 0
+base_price = 15
+age = 21
+seat_type = 'Gold'
+show_time = 'Evening'
 
-num_of_friends = 4
+if age > 17:
+    print('User is eligible to book a ticket')
 
-appetizers = 37.89
-main_courses = 57.34
-desserts = 39.39
-drinks = 64.21
+if age >= 21:
+    print('User is eligible for Evening shows')
+else:
+    print('User is not eligible for Evening shows')
 
-running_total += appetizers + main_courses + desserts + drinks
-print('Total bill so far:', running_total)
+is_member = False
+is_weekend = False
 
-tip = running_total * 0.25
-print('Tip amount:', tip)
+discount = 0
+if is_member and age >= 21:
+    discount = 3
+    print('User qualifies for membership discount')
+else:
+    print('User does not qualify for membership discount')
+print('Discount:', discount)
 
-running_total += tip
-print('Total with tip:', running_total)
+extra_charges = 0
+if is_weekend or show_time == 'Evening':
+    extra_charges = 2
+    print('Extra charges will be applied')
+else:
+    print('No extra charges will be applied')
+print('Extra charges:', extra_charges)
 
-final_bill = running_total / num_of_friends
-print('Bill per person:', final_bill)
+if age >= 21 or age >= 18 and (show_time != 'Evening' or is_member):
+    print('Ticket booking condition satisfied')
 
-each_pays = round(final_bill,2)
-print(f"Each person pays: {each_pays}")
+    service_charges = 0
+    if seat_type == 'Premium':
+        service_charges = 5
+    elif seat_type == 'Gold':
+        service_charges = 3
+    else:
+        service_charges = 1
+    print('Service charges:', service_charges)
+
+    final_price = extra_charges + service_charges + base_price - discount
+    print("Final price of ticket:",final_price)
+else:
+    print('Ticket booking failed due to restrictions')
