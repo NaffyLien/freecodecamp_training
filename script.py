@@ -1,19 +1,29 @@
-def apply_discount(price, discount):
-    if not isinstance(price, (int, float)):
-        return ("The price should be a number")
+def caesar(text, shift, encrypt=True):
+    if not isinstance(shift, int):
+        return 'Shift must be an integer value.'
 
-    if price <= 0:
-        return ("The price should be greater than 0")
+    if shift < 1 or shift > 25:
+        return 'Shift must be an integer between 1 and 25.'
 
-    if not isinstance(discount, (int, float)):
-        return ("The discount should be a number")
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
-    if 0 > discount or discount > 100:
-        return("The discount should be between 0 and 100")
+    if not encrypt:
+        shift = - shift
 
-    return price - price * discount / 100
+    shifted_alphabet = alphabet[shift:] + alphabet[:shift]
+    translation_table = str.maketrans(alphabet + alphabet.upper(), shifted_alphabet + shifted_alphabet.upper())
+    encrypted_text = text.translate(translation_table)
+    return encrypted_text
 
-price = "50"
-discount = 0
-appliance = apply_discount(price, discount)
-print("Final price:", appliance)
+
+def encrypt(text, shift):
+    return caesar(text, shift)
+
+
+def decrypt(text, shift):
+    return caesar(text, shift, encrypt=False)
+
+
+encrypted_text = "Pbhentr vf sbhaq va hayvxryl cynprf."
+decrypted_text = decrypt(encrypted_text, 13)
+print(decrypted_text)
