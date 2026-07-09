@@ -1,23 +1,19 @@
-distance_mi = 7
-is_raining = False
-has_bike = True
-has_car = False
-has_ride_share_app = False
+def apply_discount(price, discount):
+    if not isinstance(price, (int, float)):
+        return ("The price should be a number")
 
-if not is_raining and (has_bike or has_car or has_ride_share_app) :
-    commuting = True
+    if price <= 0:
+        return ("The price should be greater than 0")
 
-if not distance_mi:
-    print("False")
-elif distance_mi <=1 :
-    if not is_raining:
-        print("True")
-    else: print("False")
-elif distance_mi > 1 and distance_mi <= 6:
-    if has_bike and not is_raining:
-        print("True")
-    else: print("False")
-elif distance_mi > 6:
-    if has_car or has_ride_share_app:
-        print("True")
-    else: print("False")
+    if not isinstance(discount, (int, float)):
+        return ("The discount should be a number")
+
+    if 0 > discount or discount > 100:
+        return("The discount should be between 0 and 100")
+
+    return price - price * discount / 100
+
+price = "50"
+discount = 0
+appliance = apply_discount(price, discount)
+print("Final price:", appliance)
