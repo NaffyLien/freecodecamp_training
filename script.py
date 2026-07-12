@@ -1,29 +1,38 @@
-def caesar(text, shift, encrypt=True):
-    if not isinstance(shift, int):
-        return 'Shift must be an integer value.'
-
-    if shift < 1 or shift > 25:
-        return 'Shift must be an integer between 1 and 25.'
-
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
-
-    if not encrypt:
-        shift = - shift
-
-    shifted_alphabet = alphabet[shift:] + alphabet[:shift]
-    translation_table = str.maketrans(alphabet + alphabet.upper(), shifted_alphabet + shifted_alphabet.upper())
-    encrypted_text = text.translate(translation_table)
-    return encrypted_text
+full_dot = '●'
+empty_dot = '○'
 
 
-def encrypt(text, shift):
-    return caesar(text, shift)
+def create_character(name, strength, intelligence, charisma):
+    if not isinstance(name, str):
+        return "The character name should be a string"
+
+    elif name == "":
+        return "The character should have a name"
+
+    elif len(name) > 10:
+        return "The character name is too long"
+
+    elif " " in name:
+        return "The character name should not contain spaces"
+
+    if not isinstance(strength, int) or not isinstance(intelligence, int) or not isinstance(charisma, int):
+        return "All stats should be integers"
+
+    elif strength < 1 or intelligence < 1 or charisma < 1:
+        return "All stats should be no less than 1"
+
+    elif strength > 4 or intelligence > 4 or charisma > 4:
+        return "All stats should be no more than 4"
+
+    elif strength + intelligence + charisma != 7:
+        return "The character should start with 7 points"
+
+    return f"{name}\nSTR {full_dot * strength}{empty_dot * (10 - strength)}\nINT {full_dot * intelligence}{empty_dot * (10 - intelligence)}\nCHA {full_dot * charisma}{empty_dot * (10 - charisma)}"
 
 
-def decrypt(text, shift):
-    return caesar(text, shift, encrypt=False)
-
-
-encrypted_text = "Pbhentr vf sbhaq va hayvxryl cynprf."
-decrypted_text = decrypt(encrypted_text, 13)
-print(decrypted_text)
+name = "ren"
+strength = 1
+intelligence = 1
+charisma = 1
+created = create_character(name, strength, intelligence, charisma)
+print(created)
