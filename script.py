@@ -27,12 +27,15 @@ def create_character(name, strength, intelligence, charisma):
     elif strength + intelligence + charisma != 7:
         return "The character should start with 7 points"
 
-    return f"{name}\nSTR {full_dot * strength}{empty_dot * (10 - strength)}\nINT {full_dot * intelligence}{empty_dot * (10 - intelligence)}\nCHA {full_dot * charisma}{empty_dot * (10 - charisma)}"
-
+    return f"""{name}
+STR {full_dot * strength}{empty_dot * (10 - strength)}
+INT {full_dot * intelligence}{empty_dot * (10 - intelligence)}
+CHA {full_dot * charisma}{empty_dot * (10 - charisma)}
+"""
 
 name = "ren"
-strength = 1
-intelligence = 1
+strength = 3
+intelligence = 3
 charisma = 1
 created = create_character(name, strength, intelligence, charisma)
 print(created)
