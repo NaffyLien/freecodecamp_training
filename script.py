@@ -1,41 +1,23 @@
-full_dot = '●'
-empty_dot = '○'
+def pin_extractor(poems):
+    secret_codes = []
+    for poem in poems:
+        secret_code = ''
+        lines = poem.split('\n')
+        for line_index, line in enumerate(lines):
+            words = line.split()
+            if len(words) > line_index:
+                secret_code += str(len(words[line_index]))
+            else:
+                secret_code += '0'
+        secret_codes.append(secret_code)
+    return secret_codes
 
+poem = """Stars and the moon
+shine in the sky
+white and
+until the end of the night"""
 
-def create_character(name, strength, intelligence, charisma):
-    if not isinstance(name, str):
-        return "The character name should be a string"
+poem2 = 'The grass is green\nhere and there\nhoping for rain\nbefore it turns yellow'
+poem3 = 'There\nonce\nwas\na\ndragon'
 
-    elif name == "":
-        return "The character should have a name"
-
-    elif len(name) > 10:
-        return "The character name is too long"
-
-    elif " " in name:
-        return "The character name should not contain spaces"
-
-    if not isinstance(strength, int) or not isinstance(intelligence, int) or not isinstance(charisma, int):
-        return "All stats should be integers"
-
-    elif strength < 1 or intelligence < 1 or charisma < 1:
-        return "All stats should be no less than 1"
-
-    elif strength > 4 or intelligence > 4 or charisma > 4:
-        return "All stats should be no more than 4"
-
-    elif strength + intelligence + charisma != 7:
-        return "The character should start with 7 points"
-
-    return f"""{name}
-STR {full_dot * strength}{empty_dot * (10 - strength)}
-INT {full_dot * intelligence}{empty_dot * (10 - intelligence)}
-CHA {full_dot * charisma}{empty_dot * (10 - charisma)}
-"""
-
-name = "ren"
-strength = 3
-intelligence = 3
-charisma = 1
-created = create_character(name, strength, intelligence, charisma)
-print(created)
+print(pin_extractor([poem, poem2, poem3]))
